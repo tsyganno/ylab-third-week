@@ -1,4 +1,5 @@
-def timer(call_count, start_sleep_time=1, factor=4, border_sleep_time=5):
+def timer(call_count, start_sleep_time=1, factor=4, border_sleep_time=20):
+    """Декоратор для повторного выполнения декорируемой функции через некоторое время."""
     def function(func):
         def inner(*args):
             t = start_sleep_time
@@ -7,7 +8,7 @@ def timer(call_count, start_sleep_time=1, factor=4, border_sleep_time=5):
             count = 1
             for _ in range(call_count):
                 if t < border_sleep_time:
-                    t = start_sleep_time * 2 ** factor
+                    t = t * 2 ** factor
                     print(f'Запуск номер {count}. Ожидание: {t} секунд. Результат декорируемой функций = {func(*args)}')
                     count += 1
                 else:
